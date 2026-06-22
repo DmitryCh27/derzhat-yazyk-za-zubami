@@ -167,8 +167,36 @@
         font-weight: 700;
       }
 
+      .meta-grid__cta {
+        position: relative;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .meta-grid__cta:hover,
+      .meta-grid__cta:focus-within {
+        background: #1c1c20;
+      }
+
+      .meta-grid__go {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+      }
+
+      .meta-grid__stretch {
+        position: absolute;
+        inset: 0;
+      }
+
       .shows {
         padding: 26px 0 52px;
+        scroll-margin-top: 84px;
       }
 
       .shows__head {
@@ -545,15 +573,17 @@
               <dt>Преподаватель</dt>
               <dd>Абдрахимова Энже Альбертовна</dd>
             </div>
-            <div>
+            <div class="meta-grid__cta">
               <dt>Постановок</dt>
               <dd>14</dd>
+              <span class="meta-grid__go">Смотреть постановки ↓</span>
+              <a class="meta-grid__stretch" href="#shows" aria-label="Смотреть постановки"></a>
             </div>
           </dl>
         </div>
       </section>
 
-      <section class="shows" aria-labelledby="shows-title">
+      <section id="shows" class="shows" aria-labelledby="shows-title">
         <div class="wrap">
           <div class="shows__head">
             <h2 id="shows-title">Постановки</h2>
