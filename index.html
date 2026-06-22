@@ -57,23 +57,13 @@
 
       .hero {
         position: relative;
-        min-height: 84vh;
-        display: grid;
-        align-items: end;
+        height: clamp(300px, 50vh, 540px);
         isolation: isolate;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        z-index: -2;
         background-image:
-          linear-gradient(90deg, rgba(11, 11, 13, 0.9) 0%, rgba(11, 11, 13, 0.46) 42%, rgba(11, 11, 13, 0.08) 76%),
-          linear-gradient(180deg, rgba(11, 11, 13, 0.2) 0%, rgba(11, 11, 13, 0.22) 55%, #0b0b0d 100%),
+          linear-gradient(180deg, rgba(11, 11, 13, 0.55) 0%, rgba(11, 11, 13, 0) 24%, rgba(11, 11, 13, 0) 62%, var(--bg) 100%),
           url("Общее фото.jpg");
         background-size: cover;
-        background-position: center;
+        background-position: center 28%;
       }
 
       .hero::after {
@@ -82,8 +72,18 @@
         left: 0;
         right: 0;
         bottom: 0;
-        height: 7px;
+        height: 4px;
         background: linear-gradient(90deg, var(--accent), transparent 72%);
+      }
+
+      .hero-intro {
+        background: var(--bg);
+        padding: 26px 0 14px;
+      }
+
+      .hero-intro__inner {
+        width: min(var(--max), calc(100% - 32px));
+        margin: 0 auto;
       }
 
       .nav {
@@ -142,14 +142,8 @@
         color: var(--text);
       }
 
-      .hero__content {
-        width: min(var(--max), calc(100% - 32px));
-        margin: 0 auto;
-        padding: 98px 0 48px;
-      }
-
       .eyebrow {
-        margin: 0 0 18px;
+        margin: 0 0 14px;
         color: var(--accent);
         font-size: 0.82rem;
         font-weight: 900;
@@ -165,16 +159,16 @@
       }
 
       h1 {
-        max-width: 720px;
-        margin-bottom: 22px;
-        font-size: clamp(2.65rem, 5.8vw, 5.4rem);
-        line-height: 0.96;
+        max-width: 760px;
+        margin-bottom: 14px;
+        font-size: clamp(2.3rem, 5vw, 4rem);
+        line-height: 1;
         font-weight: 900;
       }
 
       .lead {
-        max-width: 560px;
-        margin-bottom: 24px;
+        max-width: 620px;
+        margin-bottom: 20px;
         color: rgba(244, 241, 237, 0.84);
         font-size: clamp(1rem, 1.5vw, 1.18rem);
       }
@@ -214,8 +208,8 @@
       }
 
       section {
-        padding: 78px 0;
-        scroll-margin-top: 82px;
+        padding: 38px 0;
+        scroll-margin-top: 98px;
       }
 
       .wrap {
@@ -226,9 +220,9 @@
       .section-head {
         display: grid;
         grid-template-columns: 0.72fr 1fr;
-        gap: 44px;
+        gap: 34px;
         align-items: start;
-        margin-bottom: 38px;
+        margin-bottom: 26px;
       }
 
       h2 {
@@ -250,7 +244,7 @@
       }
 
       .stat {
-        padding: 28px 24px;
+        padding: 16px 18px;
         border-right: 1px solid var(--line);
       }
 
@@ -276,7 +270,7 @@
       }
 
       .about {
-        padding-top: 42px;
+        padding-top: 28px;
       }
 
       .services .section-head p {
@@ -290,11 +284,11 @@
       }
 
       .service {
-        min-height: 238px;
+        min-height: 138px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 24px;
+        padding: 20px;
         border: 1px solid rgba(17, 17, 19, 0.14);
         border-radius: 8px;
         background: #fffaf3;
@@ -323,7 +317,7 @@
       .portfolio__layout {
         display: grid;
         grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-        gap: 36px;
+        gap: 26px;
         align-items: center;
       }
 
@@ -344,11 +338,11 @@
 
       .list {
         display: grid;
-        gap: 16px;
+        gap: 12px;
       }
 
       .list-item {
-        padding: 0 0 18px;
+        padding: 0 0 12px;
         border-bottom: 1px solid var(--line);
       }
 
@@ -364,15 +358,27 @@
 
       .gallery {
         position: relative;
-        background:
-          linear-gradient(180deg, #0b0b0d 0%, #141416 56%, #0b0b0d 100%);
+        padding: 34px 0;
+        color: #101012;
+        background: #f7f7f4;
+      }
+
+      .gallery .section-head {
+        max-width: 760px;
+        display: block;
+        margin: 0 auto 18px;
+        text-align: center;
+      }
+
+      .gallery .section-head p {
+        max-width: 620px;
+        margin: 10px auto 0;
+        color: #575757;
       }
 
       .gallery-shell {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(230px, 0.28fr);
-        gap: 20px;
-        align-items: stretch;
+        max-width: 960px;
+        margin: 0 auto;
       }
 
       .carousel {
@@ -381,32 +387,37 @@
 
       .carousel__stage {
         position: relative;
+        min-height: 250px;
         overflow: hidden;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #050506;
-        aspect-ratio: 16 / 9;
+        isolation: isolate;
+        cursor: zoom-in;
+        touch-action: pan-y;
+        outline: none;
       }
 
       .carousel__slides {
-        height: 100%;
+        position: absolute;
+        inset: 0;
       }
 
       .carousel__slide {
         position: absolute;
-        inset: 0;
+        top: 14px;
+        left: 50%;
+        width: min(46vw, 440px);
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
         display: grid;
         place-items: center;
+        border-radius: 24px;
         opacity: 0;
-        transform: scale(1.02);
-        transition: opacity 0.36s ease, transform 0.36s ease;
+        box-shadow: 0 26px 70px rgba(16, 16, 18, 0.18);
+        transform: translateX(-50%) scale(0.72);
+        transition:
+          opacity 0.46s ease,
+          transform 0.56s cubic-bezier(0.2, 0.78, 0.2, 1),
+          filter 0.46s ease;
         pointer-events: none;
-      }
-
-      .carousel__slide.is-active {
-        opacity: 1;
-        transform: scale(1);
-        pointer-events: auto;
       }
 
       .carousel__slide img {
@@ -415,196 +426,291 @@
         object-fit: cover;
       }
 
+      .carousel__slide.is-active {
+        z-index: 6;
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        pointer-events: auto;
+      }
+
+      .carousel__slide.is-active img {
+        animation: subtle-photo-drift 4.8s ease-out both;
+      }
+
+      .carousel__slide.is-prev {
+        z-index: 4;
+        opacity: 0.78;
+        filter: saturate(0.82) brightness(0.9);
+        transform: translateX(calc(-50% - min(20vw, 235px))) scale(0.78);
+      }
+
+      .carousel__slide.is-next {
+        z-index: 4;
+        opacity: 0.78;
+        filter: saturate(0.82) brightness(0.9);
+        transform: translateX(calc(-50% + min(20vw, 235px))) scale(0.78);
+      }
+
+      .carousel__slide.is-prev-2 {
+        z-index: 2;
+        opacity: 0.42;
+        filter: saturate(0.65) brightness(1.04);
+        transform: translateX(calc(-50% - min(31vw, 360px))) scale(0.58);
+      }
+
+      .carousel__slide.is-next-2 {
+        z-index: 2;
+        opacity: 0.42;
+        filter: saturate(0.65) brightness(1.04);
+        transform: translateX(calc(-50% + min(31vw, 360px))) scale(0.58);
+      }
+
+      .carousel.has-three .carousel__slide.is-prev-2,
+      .carousel.has-three .carousel__slide.is-next-2 {
+        opacity: 0;
+      }
+
       .gallery-placeholder {
         width: 100%;
         height: 100%;
         display: grid;
         place-items: center;
         padding: 32px;
-        background:
-          linear-gradient(135deg, rgba(208, 29, 36, 0.22), transparent 38%),
-          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 12px),
-          #111113;
-        color: rgba(244, 241, 237, 0.78);
+        color: #141416;
         text-align: center;
+        background:
+          linear-gradient(135deg, rgba(208, 29, 36, 0.22), transparent 42%),
+          linear-gradient(90deg, #ece9e4, #d9d5ce);
       }
 
       .gallery-placeholder strong {
         display: block;
         margin-bottom: 8px;
-        color: var(--text);
         font-size: clamp(2.4rem, 8vw, 6.4rem);
         line-height: 1;
       }
 
-      .carousel__shade {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 2;
-        min-height: 32%;
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 22px;
-        padding: 26px;
-        background: linear-gradient(180deg, transparent, rgba(5, 5, 6, 0.86));
-        pointer-events: none;
+      .carousel__slide:not(.is-active) .gallery-placeholder {
+        color: rgba(20, 20, 22, 0.14);
       }
 
-      .carousel__caption {
-        max-width: 620px;
+      .carousel__slide:not(.is-active) .gallery-placeholder span {
+        opacity: 0.52;
+      }
+
+      .carousel__slide:not(.is-active) .gallery-placeholder {
+        font-size: 0;
+      }
+
+      .carousel__slide:not(.is-active) .gallery-placeholder strong {
+        margin-bottom: 0;
+        font-size: clamp(2.8rem, 7vw, 5.4rem);
+      }
+
+      .carousel__shade {
+        display: none;
       }
 
       .carousel__caption h3 {
-        margin-bottom: 6px;
-        font-size: clamp(1.35rem, 3vw, 2.8rem);
-        line-height: 1.02;
+        margin-bottom: 4px;
+        font-size: 1rem;
+        line-height: 1.2;
       }
 
       .carousel__caption p {
         margin-bottom: 0;
-        color: rgba(244, 241, 237, 0.76);
+        color: #6c6c6c;
+        font-size: 0.94rem;
       }
 
       .carousel__count {
-        flex: 0 0 auto;
-        color: rgba(244, 241, 237, 0.82);
-        font-size: 0.95rem;
-        font-weight: 900;
+        display: none;
       }
 
       .carousel__controls {
-        position: absolute;
-        inset: 0;
-        z-index: 3;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 18px;
-        pointer-events: none;
+        justify-content: center;
+        gap: 18px;
+        margin-top: 12px;
       }
 
       .icon-button {
-        width: 48px;
-        height: 48px;
+        width: 34px;
+        height: 34px;
         display: inline-grid;
         place-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.22);
+        border: 0;
         border-radius: 50%;
-        color: var(--text);
-        background: rgba(11, 11, 13, 0.56);
-        backdrop-filter: blur(14px);
+        color: #777;
+        background: transparent;
         cursor: pointer;
-        pointer-events: auto;
-        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        transition: color 0.2s ease, transform 0.2s ease;
       }
 
       .icon-button:hover,
       .icon-button:focus-visible {
-        transform: scale(1.06);
-        border-color: rgba(255, 255, 255, 0.48);
-        background: var(--accent);
+        color: #5c48f2;
+        transform: scale(1.08);
         outline: none;
       }
 
+      .carousel__play {
+        width: auto;
+        min-width: 72px;
+        padding: 0 10px;
+        border-radius: 999px;
+        color: #666;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
       .carousel__progress {
-        height: 4px;
-        margin-top: 14px;
+        display: none;
+        width: min(320px, 76vw);
+        height: 3px;
+        margin: 16px auto 0;
         overflow: hidden;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.1);
+        background: #dedede;
       }
 
       .carousel__progress span {
+        display: none;
+      }
+
+      .carousel__timer {
         display: block;
         height: 100%;
         width: 0;
         border-radius: inherit;
-        background: var(--accent);
-        transition: width 0.3s ease;
+        background: #5c48f2;
       }
 
-      .gallery-panel {
-        min-width: 0;
-        display: grid;
-        grid-template-rows: auto 1fr;
-        gap: 16px;
-        padding: 18px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.045);
-      }
-
-      .gallery-panel__top {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 12px;
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-
-      .gallery-panel__top strong {
-        color: var(--text);
-        font-size: 1.1rem;
+      .carousel.is-playing .carousel__timer {
+        animation: timer-fill 4.8s linear forwards;
       }
 
       .thumbs {
-        min-height: 0;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        display: flex;
+        align-items: center;
+        justify-content: center;
         gap: 10px;
-        overflow: auto;
-        padding-right: 4px;
       }
 
       .thumb {
-        position: relative;
-        overflow: hidden;
-        min-height: 74px;
-        border: 1px solid rgba(255, 255, 255, 0.13);
-        border-radius: 6px;
-        color: var(--text);
-        background: #09090a;
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: #cfcfcf;
         cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+
+      .thumb.is-active,
+      .thumb:focus-visible {
+        background: #5c48f2;
+        transform: scale(1.3);
+        outline: none;
       }
 
       .thumb img,
       .thumb__empty {
-        width: 100%;
-        height: 100%;
-        min-height: 74px;
-        object-fit: cover;
+        display: none;
       }
 
-      .thumb__empty {
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        display: none;
+        place-items: center;
+        padding: 24px;
+        background: rgba(5, 5, 6, 0.92);
+      }
+
+      .lightbox.is-open {
+        display: grid;
+      }
+
+      .lightbox__figure {
+        width: min(1120px, 100%);
+        max-height: 90vh;
+        margin: 0;
+        display: grid;
+        gap: 14px;
+      }
+
+      .lightbox__media {
+        overflow: hidden;
         display: grid;
         place-items: center;
-        color: rgba(244, 241, 237, 0.58);
+        border-radius: 12px;
+        background: #111113;
+      }
+
+      .lightbox__media img {
+        max-width: 100%;
+        max-height: 78vh;
+        object-fit: contain;
+      }
+
+      .lightbox__placeholder {
+        width: min(900px, 86vw);
+        min-height: min(520px, 66vh);
+        display: grid;
+        place-items: center;
+        color: var(--text);
+        text-align: center;
         background:
-          linear-gradient(135deg, rgba(208, 29, 36, 0.22), transparent),
-          #131316;
-        font-weight: 900;
+          linear-gradient(135deg, rgba(208, 29, 36, 0.26), transparent 42%),
+          #151518;
       }
 
-      .thumb::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border: 2px solid transparent;
-        border-radius: inherit;
-        transition: border-color 0.2s ease;
+      .lightbox__placeholder strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: clamp(3rem, 12vw, 8rem);
+        line-height: 1;
       }
 
-      .thumb.is-active::after,
-      .thumb:focus-visible::after {
-        border-color: var(--accent);
+      .lightbox__caption {
+        margin: 0;
+        color: rgba(244, 241, 237, 0.82);
+        text-align: center;
+      }
+
+      .lightbox__close {
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        z-index: 81;
+      }
+
+      @keyframes subtle-photo-drift {
+        0% {
+          transform: scale(1.01);
+        }
+
+        100% {
+          transform: scale(1.06);
+        }
+      }
+
+      @keyframes timer-fill {
+        from {
+          width: 0;
+        }
+
+        to {
+          width: 100%;
+        }
       }
 
       .contact {
-        padding-bottom: 42px;
+        padding-bottom: 24px;
       }
 
       .contact__box {
@@ -612,7 +718,7 @@
         grid-template-columns: 1fr auto;
         gap: 28px;
         align-items: center;
-        padding: 34px 0;
+        padding: 24px 0;
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
       }
@@ -630,7 +736,7 @@
       .footer {
         width: min(var(--max), calc(100% - 32px));
         margin: 0 auto;
-        padding: 22px 0 34px;
+        padding: 16px 0 22px;
         display: flex;
         justify-content: space-between;
         gap: 18px;
@@ -649,19 +755,15 @@
         }
 
         .hero {
-          min-height: 82vh;
-        }
-
-        .hero::before {
+          height: clamp(300px, 46vh, 460px);
           background-image:
-            linear-gradient(180deg, rgba(11, 11, 13, 0.2) 0%, rgba(11, 11, 13, 0.52) 45%, #0b0b0d 100%),
+            linear-gradient(180deg, rgba(11, 11, 13, 0.6) 0%, rgba(11, 11, 13, 0) 26%, rgba(11, 11, 13, 0) 58%, var(--bg) 100%),
             url("Общее фото.jpg");
-          background-position: 42% center;
+          background-position: center 24%;
         }
 
-        .hero__content {
-          padding-top: 92px;
-          padding-bottom: 42px;
+        .hero-intro {
+          padding-top: 22px;
         }
 
         .section-head,
@@ -672,30 +774,29 @@
         }
 
         .stats {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(3, 1fr);
         }
 
         .service-grid {
           grid-template-columns: repeat(2, 1fr);
         }
 
-        .gallery-panel {
-          grid-template-rows: auto auto;
-        }
-
-        .thumbs {
-          grid-template-columns: repeat(5, minmax(86px, 1fr));
-          overflow-x: auto;
-          overflow-y: hidden;
-        }
-
         .stat {
-          border-right: 0;
-          border-bottom: 1px solid var(--line);
+          padding: 14px 10px;
+          border-right: 1px solid var(--line);
+          border-bottom: 0;
+        }
+
+        .stat strong {
+          font-size: 1.7rem;
+        }
+
+        .stat span {
+          font-size: 0.86rem;
         }
 
         .stat:last-child {
-          border-bottom: 0;
+          border-right: 0;
         }
       }
 
@@ -713,7 +814,12 @@
         }
 
         section {
-          padding: 64px 0;
+          padding: 32px 0;
+        }
+
+        .section-head {
+          gap: 18px;
+          margin-bottom: 20px;
         }
 
         .button {
@@ -721,25 +827,50 @@
         }
 
         .carousel__stage {
-          aspect-ratio: 4 / 5;
+          min-height: 250px;
+        }
+
+        .carousel__slide {
+          top: 46px;
+          width: min(78vw, 310px);
+          border-radius: 18px;
+        }
+
+        .carousel__slide.is-prev {
+          transform: translateX(calc(-50% - 34vw)) scale(0.7);
+        }
+
+        .carousel__slide.is-next {
+          transform: translateX(calc(-50% + 34vw)) scale(0.7);
+        }
+
+        .carousel__slide.is-prev-2,
+        .carousel__slide.is-next-2 {
+          opacity: 0;
         }
 
         .carousel__shade {
-          min-height: 42%;
-          align-items: flex-end;
-          padding: 18px;
+          padding: 0 10px;
         }
 
         .carousel__caption p {
           font-size: 0.92rem;
         }
 
-        .carousel__count {
-          align-self: flex-start;
+        .carousel__controls {
+          margin-top: 14px;
+          flex-wrap: wrap;
+          gap: 12px;
         }
 
-        .carousel__controls {
-          padding: 12px;
+        .thumbs {
+          gap: 7px;
+        }
+
+        .carousel__play {
+          min-width: 72px;
+          height: 38px;
+          flex: 0 0 auto;
         }
 
         .icon-button {
@@ -748,11 +879,16 @@
         }
 
         .service-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .service {
-          min-height: 210px;
+          min-height: 116px;
+          padding: 16px;
+        }
+
+        .service h3 {
+          font-size: 1.05rem;
         }
 
         .footer {
@@ -779,8 +915,10 @@
       </header>
 
       <main id="top">
-        <section class="hero" aria-label="Постановка Держать язык за зубами">
-          <div class="hero__content">
+        <section class="hero" aria-label="Постановка Держать язык за зубами"></section>
+
+        <section class="hero-intro" aria-label="О постановке">
+          <div class="hero-intro__inner">
             <p class="eyebrow">постановка · секрет · молчание</p>
             <h1>Держать язык за зубами</h1>
             <p class="lead">
@@ -863,28 +1001,6 @@
           </div>
         </section>
 
-        <section class="portfolio" aria-label="Образ постановки">
-          <div class="wrap portfolio__layout">
-            <div class="photo-frame">
-              <img src="Общее фото.jpg" alt="Сцена постановки Держать язык за зубами">
-            </div>
-            <div class="list">
-              <div class="list-item">
-                <h3>Красный акцент</h3>
-                <p>Веревка становится знаком тайны, давления и невозможности сказать вслух.</p>
-              </div>
-              <div class="list-item">
-                <h3>Черно-белая сцена</h3>
-                <p>Сдержанная палитра усиливает конфликт между внутренним криком и внешней тишиной.</p>
-              </div>
-              <div class="list-item">
-                <h3>Физика молчания</h3>
-                <p>Движение показывает состояние человека, который знает больше, чем может произнести.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section id="gallery" class="gallery" aria-labelledby="gallery-title">
           <div class="wrap">
             <div class="section-head">
@@ -904,34 +1020,31 @@
               >
                 <div class="carousel__stage" tabindex="0" aria-label="Фотографии постановки">
                   <div class="carousel__slides" aria-live="polite"></div>
-                  <div class="carousel__shade">
-                    <div class="carousel__caption">
-                      <h3></h3>
-                      <p></p>
-                    </div>
-                    <div class="carousel__count" aria-live="polite">01 / 15</div>
+                </div>
+                <div class="carousel__shade">
+                  <div class="carousel__caption">
+                    <h3></h3>
+                    <p></p>
                   </div>
-                  <div class="carousel__controls" aria-label="Управление галереей">
-                    <button class="icon-button carousel__prev" type="button" aria-label="Предыдущее фото">
-                      &#8592;
-                    </button>
-                    <button class="icon-button carousel__next" type="button" aria-label="Следующее фото">
-                      &#8594;
-                    </button>
-                  </div>
+                  <div class="carousel__count" aria-live="polite">01 / 15</div>
+                </div>
+                <div class="carousel__controls" aria-label="Управление галереей">
+                  <button class="icon-button carousel__prev" type="button" aria-label="Предыдущее фото">
+                    &#8592;
+                  </button>
+                  <div class="thumbs" role="group" aria-label="Выбор фотографии"></div>
+                  <button class="icon-button carousel__next" type="button" aria-label="Следующее фото">
+                    &#8594;
+                  </button>
+                  <button class="icon-button carousel__play" type="button" aria-label="Остановить анимацию">
+                    Пауза
+                  </button>
                 </div>
                 <div class="carousel__progress" aria-hidden="true">
                   <span></span>
+                  <i class="carousel__timer"></i>
                 </div>
               </div>
-
-              <aside class="gallery-panel" aria-label="Миниатюры галереи">
-                <div class="gallery-panel__top">
-                  <strong>Кадры</strong>
-                  <span>15 слотов</span>
-                </div>
-                <div class="thumbs" role="group" aria-label="Выбор фотографии"></div>
-              </aside>
             </div>
           </div>
         </section>
@@ -957,6 +1070,16 @@
       </footer>
     </div>
 
+    <div class="lightbox" aria-modal="true" role="dialog" aria-label="Просмотр фото">
+      <button class="icon-button lightbox__close" type="button" aria-label="Закрыть фото">
+        &#215;
+      </button>
+      <figure class="lightbox__figure">
+        <div class="lightbox__media"></div>
+        <figcaption class="lightbox__caption"></figcaption>
+      </figure>
+    </div>
+
     <script>
       // Add real dance photos by setting src, for example: { src: "photo-02.jpg", title: "...", description: "..." }.
       const galleryItems = [
@@ -966,19 +1089,7 @@
           description: "Первый визуальный ключ постановки: красный акцент, молчание и напряжение."
         },
         { title: "Кадр 02", description: "Момент внутреннего напряжения." },
-        { title: "Кадр 03", description: "Пауза перед несказанным словом." },
-        { title: "Кадр 04", description: "Тело ищет способ удержать тайну." },
-        { title: "Кадр 05", description: "Желание выкрикнуть становится сильнее." },
-        { title: "Кадр 06", description: "Молчание превращается в действие." },
-        { title: "Кадр 07", description: "Секрет меняет ритм и дыхание." },
-        { title: "Кадр 08", description: "Красный акцент стягивает пространство." },
-        { title: "Кадр 09", description: "Взгляд остается на границе признания." },
-        { title: "Кадр 10", description: "Движение сдерживает внутренний крик." },
-        { title: "Кадр 11", description: "Покой уже невозможно вернуть." },
-        { title: "Кадр 12", description: "Фрагмент сценической линии." },
-        { title: "Кадр 13", description: "Фрагмент сценической линии." },
-        { title: "Кадр 14", description: "Фрагмент сценической линии." },
-        { title: "Кадр 15", description: "Финальный акцент фотоистории." }
+        { title: "Кадр 03", description: "Пауза перед несказанным словом." }
       ];
 
       const gallery = document.querySelector(".carousel");
@@ -988,13 +1099,130 @@
       const captionText = document.querySelector(".carousel__caption p");
       const count = document.querySelector(".carousel__count");
       const progress = document.querySelector(".carousel__progress span");
+      const playButton = document.querySelector(".carousel__play");
       const stage = document.querySelector(".carousel__stage");
+      const lightbox = document.querySelector(".lightbox");
+      const lightboxMedia = document.querySelector(".lightbox__media");
+      const lightboxCaption = document.querySelector(".lightbox__caption");
+      const lightboxClose = document.querySelector(".lightbox__close");
+      const autoDelay = 4800;
       let activeIndex = 0;
       let touchStartX = 0;
+      let touchStartY = 0;
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let pointerIsDown = false;
+      let mouseStartX = 0;
+      let mouseStartY = 0;
+      let mouseIsDown = false;
+      let lastTapAt = 0;
+      let autoTimer;
+      let isPlaying = true;
+      let userPaused = false;
 
       const pad = (number) => String(number).padStart(2, "0");
 
+      function restartTimerAnimation() {
+        gallery.classList.remove("is-playing");
+        window.requestAnimationFrame(() => {
+          if (isPlaying) {
+            gallery.classList.add("is-playing");
+          }
+        });
+      }
+
+      function scheduleNext() {
+        window.clearTimeout(autoTimer);
+        if (!isPlaying) {
+          return;
+        }
+
+        autoTimer = window.setTimeout(() => {
+          setActive(activeIndex + 1);
+        }, autoDelay);
+      }
+
+      function pauseAuto(isUserAction = true) {
+        isPlaying = false;
+        userPaused = isUserAction || userPaused;
+        window.clearTimeout(autoTimer);
+        gallery.classList.remove("is-playing");
+        playButton.textContent = "Пуск";
+        playButton.setAttribute("aria-label", "Запустить анимацию");
+      }
+
+      function playAuto(isUserAction = true) {
+        if (isUserAction) {
+          userPaused = false;
+        }
+
+        isPlaying = true;
+        playButton.textContent = "Пауза";
+        playButton.setAttribute("aria-label", "Остановить анимацию");
+        restartTimerAnimation();
+        scheduleNext();
+      }
+
+      function openLightbox(index = activeIndex) {
+        const item = galleryItems[index];
+        pauseAuto(false);
+        lightboxMedia.innerHTML = "";
+
+        if (item.src) {
+          const img = document.createElement("img");
+          img.src = item.src;
+          img.alt = item.title;
+          lightboxMedia.append(img);
+        } else {
+          const placeholder = document.createElement("div");
+          placeholder.className = "lightbox__placeholder";
+          placeholder.innerHTML = `<span><strong>${pad(index + 1)}</strong>${item.description}</span>`;
+          lightboxMedia.append(placeholder);
+        }
+
+        lightboxCaption.textContent = `${item.title}. ${item.description}`;
+        lightbox.classList.add("is-open");
+        document.body.style.overflow = "hidden";
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightboxMedia.innerHTML = "";
+        document.body.style.overflow = "";
+        if (!userPaused) {
+          playAuto(false);
+        }
+        stage.focus();
+      }
+
+      function handleSwipe(deltaX, deltaY = 0) {
+        if (Math.abs(deltaX) > 44 && Math.abs(deltaX) > Math.abs(deltaY) * 1.25) {
+          setActive(activeIndex + (deltaX < 0 ? 1 : -1));
+          return true;
+        }
+
+        return false;
+      }
+
+      function handlePossibleDoubleTap(deltaX = 0, deltaY = 0) {
+        if (Math.abs(deltaX) > 12 || Math.abs(deltaY) > 12) {
+          return;
+        }
+
+        const now = Date.now();
+        if (now - lastTapAt < 320) {
+          openLightbox(activeIndex);
+          lastTapAt = 0;
+          return;
+        }
+
+        lastTapAt = now;
+      }
+
       function renderGallery() {
+        gallery.classList.toggle("has-three", galleryItems.length === 3);
+
         galleryItems.forEach((item, index) => {
           const slide = document.createElement("div");
           slide.className = "carousel__slide";
@@ -1046,8 +1274,17 @@
         const thumbs = thumbsRoot.querySelectorAll(".thumb");
 
         slides.forEach((slide, slideIndex) => {
-          slide.classList.toggle("is-active", slideIndex === activeIndex);
-          slide.toggleAttribute("hidden", slideIndex !== activeIndex);
+          let offset = (slideIndex - activeIndex + galleryItems.length) % galleryItems.length;
+          if (offset > galleryItems.length / 2) {
+            offset -= galleryItems.length;
+          }
+
+          slide.classList.remove("is-active", "is-prev", "is-next", "is-prev-2", "is-next-2");
+          slide.classList.toggle("is-active", offset === 0);
+          slide.classList.toggle("is-prev", offset === -1);
+          slide.classList.toggle("is-next", offset === 1);
+          slide.classList.toggle("is-prev-2", offset === -2);
+          slide.classList.toggle("is-next-2", offset === 2);
         });
 
         thumbs.forEach((thumb, thumbIndex) => {
@@ -1060,10 +1297,19 @@
         captionText.textContent = item.description;
         count.textContent = `${pad(activeIndex + 1)} / ${galleryItems.length}`;
         progress.style.width = `${((activeIndex + 1) / galleryItems.length) * 100}%`;
+        restartTimerAnimation();
+        scheduleNext();
       }
 
       document.querySelector(".carousel__prev").addEventListener("click", () => setActive(activeIndex - 1));
       document.querySelector(".carousel__next").addEventListener("click", () => setActive(activeIndex + 1));
+      playButton.addEventListener("click", () => {
+        if (isPlaying) {
+          pauseAuto(true);
+        } else {
+          playAuto(true);
+        }
+      });
 
       gallery.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") {
@@ -1077,14 +1323,76 @@
         }
       });
 
+      stage.addEventListener("pointerdown", (event) => {
+        pointerIsDown = true;
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+      });
+
+      stage.addEventListener("pointerup", (event) => {
+        if (!pointerIsDown) {
+          return;
+        }
+
+        pointerIsDown = false;
+        const deltaX = event.clientX - pointerStartX;
+        const deltaY = event.clientY - pointerStartY;
+        const didSwipe = handleSwipe(deltaX, deltaY);
+
+        if (!didSwipe && event.pointerType && event.pointerType !== "mouse") {
+          handlePossibleDoubleTap(deltaX, deltaY);
+        }
+      });
+
+      stage.addEventListener("pointercancel", () => {
+        pointerIsDown = false;
+      });
+
+      stage.addEventListener("mousedown", (event) => {
+        mouseIsDown = true;
+        mouseStartX = event.clientX;
+        mouseStartY = event.clientY;
+      });
+
+      stage.addEventListener("mouseup", (event) => {
+        if (!mouseIsDown) {
+          return;
+        }
+
+        mouseIsDown = false;
+        handleSwipe(event.clientX - mouseStartX, event.clientY - mouseStartY);
+      });
+
+      stage.addEventListener("mouseleave", () => {
+        mouseIsDown = false;
+      });
+
       stage.addEventListener("touchstart", (event) => {
         touchStartX = event.changedTouches[0].clientX;
+        touchStartY = event.changedTouches[0].clientY;
       }, { passive: true });
 
       stage.addEventListener("touchend", (event) => {
         const deltaX = event.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(deltaX) > 44) {
-          setActive(activeIndex + (deltaX < 0 ? 1 : -1));
+        const deltaY = event.changedTouches[0].clientY - touchStartY;
+        const didSwipe = handleSwipe(deltaX, deltaY);
+
+        if (!didSwipe) {
+          handlePossibleDoubleTap(deltaX, deltaY);
+        }
+      });
+
+      stage.addEventListener("dblclick", () => openLightbox(activeIndex));
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+          closeLightbox();
         }
       });
 
