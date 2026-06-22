@@ -242,6 +242,11 @@ h2 {
 @media (max-width: 540px) {
   .brand {
     font-size: 0.76rem;
+    white-space: nowrap;
+  }
+
+  .nav__links {
+    display: none;
   }
 
   section {
