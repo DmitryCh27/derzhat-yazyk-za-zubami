@@ -350,6 +350,38 @@
         border: 1px solid var(--line);
       }
 
+      .badge--thanks {
+        color: #fff;
+        background: var(--accent);
+      }
+
+      .cf-collage {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 1fr;
+        gap: 3px;
+      }
+
+      .cf-collage__cell {
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.5) grayscale(0.15);
+      }
+
+      .cf-slide--thanks::after {
+        background:
+          radial-gradient(circle at 50% 45%, rgba(11, 4, 7, 0.35), rgba(11, 4, 7, 0.86) 75%),
+          radial-gradient(120% 60% at 50% 0%, rgba(208, 29, 36, 0.35), transparent 60%);
+      }
+
+      .cf-slide--thanks .cf-slide__num {
+        color: var(--accent);
+        font-size: 1rem;
+      }
+
       .cf-slide__title {
         position: absolute;
         left: 14px;
@@ -758,7 +790,8 @@
         { title: "Vigja", description: "Образы скандинавских шаманов, их культура и традиционные обряды.", cover: "Vigja/Vigja.jpg", href: "vigja.html", status: "ready" },
         { title: "Не коснись, а то скиснешь", description: "Кислотная горечь одного сознания может стать судьбой другого.", cover: "Не коснись, а то скиснешь/cover.jpg", href: "ne-kosnis.html", status: "ready" },
         { title: "Продажа воздуха", description: "Пока ты занят делом — у тебя уже минус… и даже кот не виноват!", cover: "Продажа воздуха/Продажа воздуха.jpg", href: "prodazha-vozduha.html", status: "ready" },
-        { title: "Затмение", description: "Миг, когда небесные светила перекрывают друг друга и мир замирает в полумраке.", cover: "Затмение/cover.jpg", href: "zatmenie.html", status: "ready" }
+        { title: "Затмение", description: "Миг, когда небесные светила перекрывают друг друга и мир замирает в полумраке.", cover: "Затмение/cover.jpg", href: "zatmenie.html", status: "ready" },
+        { title: "Благодарность руководителю", description: "Спасибо Абдрахимовой Энже Альбертовне за помощь и поддержку.", cover: null, href: "blagodarnost.html", status: "ready", type: "thanks" }
       ];
 
       const TOTAL = items.length;
@@ -778,20 +811,34 @@
         slide.className = "cf-slide" + (item.status === "soon" ? " cf-slide--soon" : "");
         slide.setAttribute("role", "group");
         slide.setAttribute("aria-label", `${i + 1} из ${TOTAL}: ${item.title}`);
-        const media = item.cover
-          ? `<div class="cf-slide__media"><div class="cf-slide__bg" style="background-image: url('${item.cover}')"></div><img src="${item.cover}" alt="${item.title}"></div>`
-          : `<div class="cf-slide__media--empty"></div>`;
-        const badge = item.status === "ready"
-          ? `<span class="badge badge--ready">Смотреть</span>`
-          : `<span class="badge badge--soon">Скоро</span>`;
-        slide.innerHTML = `
-          ${media}
-          <div class="cf-slide__top">
-            <span class="cf-slide__num">№ ${pad(i + 1)}</span>
-            ${badge}
-          </div>
-          <h3 class="cf-slide__title">${item.title}</h3>
-        `;
+        if (item.type === "thanks") {
+          slide.classList.add("cf-slide--thanks");
+          const cells = items.filter((it) => it.cover).slice(0, 9)
+            .map((it) => `<div class="cf-collage__cell" style="background-image: url('${it.cover}')"></div>`).join("");
+          slide.innerHTML = `
+            <div class="cf-collage">${cells}</div>
+            <div class="cf-slide__top">
+              <span class="cf-slide__num">✦</span>
+              <span class="badge badge--thanks">Спасибо</span>
+            </div>
+            <h3 class="cf-slide__title">${item.title}</h3>
+          `;
+        } else {
+          const media = item.cover
+            ? `<div class="cf-slide__media"><div class="cf-slide__bg" style="background-image: url('${item.cover}')"></div><img src="${item.cover}" alt="${item.title}"></div>`
+            : `<div class="cf-slide__media--empty"></div>`;
+          const badge = item.status === "ready"
+            ? `<span class="badge badge--ready">Смотреть</span>`
+            : `<span class="badge badge--soon">Скоро</span>`;
+          slide.innerHTML = `
+            ${media}
+            <div class="cf-slide__top">
+              <span class="cf-slide__num">№ ${pad(i + 1)}</span>
+              ${badge}
+            </div>
+            <h3 class="cf-slide__title">${item.title}</h3>
+          `;
+        }
         slide.addEventListener("click", () => {
           if (dragMoved) return;
           if (i === active) {
@@ -828,12 +875,13 @@
         dots.forEach((dot, i) => dot.classList.toggle("is-active", i === active));
 
         const item = items[active];
-        capNum.textContent = `№ ${pad(active + 1)} / ${TOTAL}`;
+        capNum.textContent = item.type === "thanks" ? "Благодарность" : `№ ${pad(active + 1)} / 14`;
         capTitle.textContent = item.title;
         capDesc.textContent = item.description;
         if (item.href) {
           capCta.style.display = "inline-flex";
           capCta.href = item.href;
+          capCta.textContent = item.type === "thanks" ? "Перейти →" : "Открыть постановку →";
         } else {
           capCta.style.display = "none";
         }
