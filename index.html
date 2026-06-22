@@ -795,7 +795,7 @@
         slide.addEventListener("click", () => {
           if (dragMoved) return;
           if (i === active) {
-            if (item.href) window.location.href = item.href;
+            if (item.href) openShow(item.href);
           } else {
             setActive(i);
           }
@@ -867,7 +867,43 @@
         if (Math.abs(delta) > 45) setActive(active + (delta < 0 ? 1 : -1));
       });
 
-      setActive(0);
+      function openShow(href) {
+        try { sessionStorage.setItem("kpt_lastShow", href); } catch (e) {}
+        window.location.href = href;
+      }
+
+      capCta.addEventListener("click", () => {
+        const item = items[active];
+        if (item.href) {
+          try { sessionStorage.setItem("kpt_lastShow", item.href); } catch (e) {}
+        }
+      });
+
+      let startIndex = 0;
+      try {
+        const last = sessionStorage.getItem("kpt_lastShow");
+        if (last) {
+          const idx = items.findIndex((it) => it.href === last);
+          if (idx >= 0) startIndex = idx;
+          sessionStorage.removeItem("kpt_lastShow");
+        }
+      } catch (e) {}
+
+      setActive(startIndex);
+
+      if (startIndex > 0) {
+        const jumpToShows = () => {
+          const prev = document.documentElement.style.scrollBehavior;
+          document.documentElement.style.scrollBehavior = "auto";
+          const el = document.getElementById("shows");
+          const y = el.getBoundingClientRect().top + window.pageYOffset - 70;
+          window.scrollTo(0, y);
+          document.documentElement.style.scrollBehavior = prev;
+        };
+        window.requestAnimationFrame(jumpToShows);
+        if (document.readyState === "complete") jumpToShows();
+        else window.addEventListener("load", jumpToShows);
+      }
     </script>
   </body>
 </html>
