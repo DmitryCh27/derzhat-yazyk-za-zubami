@@ -31,9 +31,28 @@
       body {
         margin: 0;
         color: var(--text);
-        background: var(--bg);
+        background: #0b0407;
         font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         line-height: 1.55;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background:
+          radial-gradient(118% 62% at 50% -12%, rgba(216, 40, 46, 0.4), rgba(216, 40, 46, 0) 56%),
+          radial-gradient(150% 120% at 50% 24%, rgba(0, 0, 0, 0) 36%, rgba(0, 0, 0, 0.78) 100%),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 0px,
+            rgba(0, 0, 0, 0) 15px,
+            rgba(0, 0, 0, 0.52) 37px,
+            rgba(0, 0, 0, 0) 60px,
+            rgba(255, 255, 255, 0.05) 76px
+          ),
+          linear-gradient(180deg, #320a14 0%, #1b070c 56%, #0b0407 100%);
       }
 
       img {
@@ -104,9 +123,7 @@
         position: absolute;
         inset: 0;
         z-index: -2;
-        background:
-          radial-gradient(120% 90% at 82% -10%, rgba(208, 29, 36, 0.28), transparent 52%),
-          linear-gradient(180deg, #131316 0%, var(--bg) 100%);
+        background: linear-gradient(180deg, rgba(11, 4, 7, 0.1) 0%, rgba(11, 4, 7, 0) 100%);
       }
 
       .wrap {
